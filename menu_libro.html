@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pastelería Almoría — menú oficial en formato libro interactivo. Tortas, postres y celebraciones: ¡Mejores Postres, Mejores Celebraciones!">
+    <meta name="theme-color" content="#75151E">
+    <title>Pastelería Almoría — Menú en Libro</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='6' y='6' width='88' height='88' rx='20' fill='%2375151E'/%3E%3Crect x='12' y='12' width='76' height='76' rx='15' fill='none' stroke='%23D8943F' stroke-width='2' opacity='0.7'/%3E%3Cpath d='M32 64h36l-4 16H36z' fill='%23FFFDF8'/%3E%3Crect x='30' y='52' width='40' height='13' rx='5' fill='%23E9A0A8'/%3E%3Ccircle cx='50' cy='42' r='8' fill='%23D71935'/%3E%3Cpath d='M50 36c1-7 5-10 10-11' stroke='%23657B4B' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           PASTELERÍA ALMORÍA — DESIGN SYSTEM
+           ============================================ */
+        :root {
+            /* Paleta de marca */
+            --vino: #75151E;
+            --rojo: #D71935;
+            --crema: #FFFDF8;
+            --tinta: #4A1118;
+            --dorado: #D8943F;
+            --rosa: #E9A0A8;
+            --verde: #657B4B;
+
+            /* Dorado claro (texto sobre fondos vino) */
+            --dorado-claro: #F1CE96;
+
+            /* Fondo del escenario del libro */
+            --escenario: #2B1013;
+
+            /* Semánticos */
+            --color-primary: var(--vino);
+            --color-primary-deep: var(--tinta);
+            --color-primary-light: var(--rojo);
+            --color-secondary: var(--rojo);
+            --color-accent: var(--verde);
+            --color-accent-warm: var(--dorado);
+            --color-accent-light: var(--rosa);
+            --color-bg: var(--crema);
+            --color-bg-alt: var(--rosa);
+            --color-surface: var(--crema);
+            --color-text: var(--tinta);
+            --color-text-muted: #8C5C63;
+            --color-text-on-dark: var(--crema);
+            --color-border: #EFE1DE;
+            --color-success: var(--verde);
+            --color-error: var(--rojo);
+
+            /* Tipografía */
+            --font-display: 'Alegreya', Georgia, serif;
+            --font-heading: 'Alegreya', Georgia, serif;
+            --font-body: 'Alegreya', Georgia, serif;
+            --font-category: 'Libre Franklin', 'Arial Narrow', sans-serif;
+
+            /* Espaciado */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+
+            /* Bordes */
+            --radius-sm: 6px;
+            --radius: 10px;
+            --radius-lg: 14px;
+            --radius-full: 9999px;
+
+            /* Sombras */
+            --shadow-sm: 0 1px 3px rgba(43, 16, 19, 0.18);
+            --shadow: 0 4px 16px rgba(43, 16, 19, 0.28);
+            --shadow-lg: 0 12px 40px rgba(43, 16, 19, 0.4);
+
+            /* Transiciones */
+            --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --transition-fast: 150ms var(--ease-out);
+            --transition: 250ms var(--ease-out);
+            --transition-slow: 400ms var(--ease-in-out);
+        }
+
+        /* ============================================
+           DARK MODE — el escenario del libro ya es oscuro
+           ============================================ */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: var(--escenario);
+            }
+        }
+
+        /* ============================================
+           REDUCED MOTION
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            overflow: hidden;
+            height: 100vh;
+            height: 100dvh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        :focus-visible {
+            outline: 2px solid var(--color-accent-warm);
+            outline-offset: 3px;
+        }
+
+        /* Utilidad: contenido solo para lectores de pantalla */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ============================================
+           BUTTON HOVER EFFECTS
+           ============================================ */
+        .volver-btn,
+        .mute-btn {
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        /* ============================================
+           FLIP-BOOK CONTAINER
+           ============================================ */
+        .book-wrapper {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--escenario);
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .book-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
+        /* ============================================
+           PAGE-FLIP OVERRIDES
+           ============================================ */
+        .flip-book {
+            display: none;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
+        }
+
+        /* ============================================
+           PÁGINAS — hojas renderizadas del PDF del menú
+           ============================================ */
+        .page {
+            background-color: var(--crema);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* La imagen ocupa toda la hoja y se muestra COMPLETA
+           (object-fit: contain => nunca recorta el contenido) */
+        .page-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
+            background-color: var(--crema);
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        /* ============================================
+           BOTÓN DE SONIDO (oculto: el sonido siempre activo)
+           ============================================ */
+        .mute-btn {
+            display: none !important;
+        }
+
+        .mute-btn {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 100;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: var(--color-text-on-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid var(--color-accent-warm);
+            opacity: 0.8;
+            transition: transform var(--transition-fast), opacity var(--transition-fast);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .mute-btn:hover { transform: scale(1.1); opacity: 1; }
+        .mute-btn:active { transform: scale(0.95); }
+
+        .mute-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        .mute-btn.is-muted { background: var(--color-text-muted); border-color: var(--color-border); }
+        .mute-btn .icon-unmuted { display: block; }
+        .mute-btn .icon-muted { display: none; }
+        .mute-btn.is-muted .icon-unmuted { display: none; }
+        .mute-btn.is-muted .icon-muted { display: block; }
+
+        /* ============================================
+           BOTÓN "VOLVER AL INICIO"
+           ============================================ */
+        .volver-btn {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 10px 26px;
+            background: var(--color-primary);
+            color: var(--color-text-on-dark);
+            font-family: var(--font-category);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--color-accent-warm);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+        }
+
+        .volver-btn:hover { transform: translateX(-50%) translateY(-2px); box-shadow: var(--shadow-lg); background: var(--color-primary-deep); }
+        .volver-btn:active { transform: translateX(-50%) translateY(0) scale(0.97); }
+        .volver-btn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* ============================================
+           INDICADOR DE PÁGINA
+           ============================================ */
+        .page-indicator {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 13px;
+            background: rgba(117, 21, 30, 0.92);
+            color: var(--color-text-on-dark);
+            font-family: var(--font-category);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--color-accent-warm);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            pointer-events: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .page-indicator__current {
+            color: var(--dorado-claro);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           SELLO DE MARCA (escritorio)
+           ============================================ */
+        .brand-badge {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            max-width: 240px;
+            pointer-events: none;
+            color: var(--color-text-on-dark);
+        }
+
+        .brand-badge__name {
+            font-family: var(--font-category);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .brand-badge__tagline {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-style: italic;
+            opacity: 0.65;
+            line-height: 1.3;
+        }
+
+        /* ============================================
+           PISTA DE TECLADO
+           ============================================ */
+        .keyboard-hint {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 200;
+            padding: 14px 24px;
+            background: rgba(74, 17, 24, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--radius);
+            border: 1px solid var(--color-accent-warm);
+            color: var(--color-text-on-dark);
+            font-family: var(--font-category);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            letter-spacing: 0.03em;
+        }
+
+        .keyboard-hint.show { opacity: 0.92; }
+
+        .keyboard-hint kbd {
+            display: inline-block;
+            padding: 2px 7px;
+            background: rgba(216, 148, 63, 0.2);
+            border: 1px solid var(--color-accent-warm);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.75rem;
+            margin: 0 2px;
+            color: var(--dorado-claro);
+        }
+
+        /* ============================================
+           OVERLAY DE CARGA
+           ============================================ */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: var(--color-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            padding: 24px;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden { opacity: 0; pointer-events: none; }
+
+        .loading-logo {
+            width: 84px;
+            height: 84px;
+            object-fit: contain;
+            border-radius: 18px;
+            border: 1.5px solid var(--color-accent-warm);
+            padding: 3px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .loading-brand {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 6vw, 2.1rem);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--color-text-on-dark);
+        }
+
+        .loading-tagline {
+            font-family: var(--font-body);
+            font-size: clamp(0.78rem, 2.6vw, 0.98rem);
+            font-style: italic;
+            color: var(--color-text-on-dark);
+            opacity: 0.8;
+            letter-spacing: 0.02em;
+        }
+
+        .loading-ornament {
+            width: 64px;
+            height: 34px;
+            color: var(--color-accent-warm);
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.05); }
+        }
+
+        .loading-text {
+            font-family: var(--font-category);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text-on-dark);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 767px) {
+            .brand-badge { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .mute-btn { top: 12px; right: 12px; width: 38px; height: 38px; }
+            .mute-btn svg { width: 18px; height: 18px; }
+            .volver-btn { bottom: 16px; padding: 9px 20px; font-size: 0.74rem; }
+            .volver-btn svg { width: 14px; height: 14px; }
+            .page-indicator { top: 12px; right: 12px; font-size: 0.66rem; padding: 5px 10px; }
+            .page-indicator__current { font-size: 0.74rem; }
+        }
+
+        @media (min-width: 768px) {
+            .volver-btn { bottom: 32px; padding: 12px 30px; font-size: 0.88rem; }
+            .brand-badge { bottom: 32px; left: 32px; }
+            .page-indicator { top: 20px; right: 20px; }
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            .mute-btn, .volver-btn, .page-indicator, .keyboard-hint,
+            .loading-overlay, .brand-badge {
+                display: none !important;
+            }
+            body { height: auto; overflow: visible; background: #fff; }
+            .book-wrapper { position: static; overflow: visible; height: auto; padding: 0; background: #fff; }
+            .book-wrapper::before { display: none; }
+            .flip-book { display: block !important; box-shadow: none; }
+            .stf__block, .stf__parent { position: static !important; transform: none !important; }
+            .page {
+                page-break-after: always;
+                width: 100% !important;
+                height: auto !important;
+                box-shadow: none !important;
+                transform: none !important;
+        }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="visually-hidden">
+        <h1>Pastelería Almoría — Menú en libro</h1>
+        <p>¡Mejores Postres, Mejores Celebraciones!</p>
+    </header>
+
+    <!-- Overlay de carga -->
+    <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+        <img class="loading-logo" src="assets/logo-almoria.png" alt="" aria-hidden="true">
+        <div class="loading-brand">Pastelería Almoría</div>
+        <svg class="loading-ornament" viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 20 Q30 8 60 20 Q90 32 110 20"/>
+            <ellipse cx="35" cy="12" rx="9" ry="5.5" transform="rotate(-30 35 12)"/>
+            <ellipse cx="60" cy="20" rx="9" ry="5.5"/>
+            <ellipse cx="85" cy="28" rx="9" ry="5.5" transform="rotate(30 85 28)"/>
+        </svg>
+        <div class="loading-tagline">¡Mejores Postres, Mejores Celebraciones!</div>
+        <div class="loading-text">Abriendo menú…</div>
+    </div>
+
+    <!-- Botón de sonido (oculto por CSS: el sonido de página siempre está activo) -->
+    <button class="mute-btn" id="muteBtn" aria-label="Activar/desactivar sonido" title="Sonido (M)">
+        <svg class="icon-unmuted" viewBox="0 0 24 24">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+        <svg class="icon-muted" viewBox="0 0 24 24">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+    </button>
+
+    <!-- Botón flotante: volver al inicio -->
+    <a href="index.html" class="volver-btn" id="volverBtn" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Volver al inicio
+    </a>
+
+    <!-- Indicador de página -->
+    <div class="page-indicator" id="pageIndicator" aria-live="polite">
+        <span class="page-indicator__current" id="pageCurrent">1</span>
+        <span aria-hidden="true">/</span>
+        <span id="pageTotal">11</span>
+    </div>
+
+    <!-- Pista de teclado -->
+    <div class="keyboard-hint" id="keyboardHint" aria-hidden="true">
+        Usa <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> para navegar &bull; <kbd>Esc</kbd> volver al inicio
+    </div>
+
+    <!-- Sello de marca (solo escritorio) -->
+    <div class="brand-badge" aria-hidden="true">
+        <span class="brand-badge__name">Pastelería Almoría</span>
+        <span class="brand-badge__tagline">¡Mejores Postres, Mejores Celebraciones!</span>
+    </div>
+
+    <!-- ==========================================
+         FLIP-BOOK — 11 hojas = 11 páginas del PDF del menú
+         ========================================== -->
+    <div class="book-wrapper" role="main" aria-label="Menú tipo libro de Pastelería Almoría">
+        <div class="flip-book" id="book">
+
+            <!-- ==========================================
+                 HOJA 01 — PORTADA
+                 ========================================== -->
+            <div class="page" data-page="p01">
+                <img class="page-img" src="assets/menulibro/p01.jpg" alt="Portada. Página 1 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 02
+                 ========================================== -->
+            <div class="page" data-page="p02">
+                <img class="page-img" src="assets/menulibro/p02.jpg" alt="Página 2 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 03
+                 ========================================== -->
+            <div class="page" data-page="p03">
+                <img class="page-img" src="assets/menulibro/p03.jpg" alt="Página 3 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 04
+                 ========================================== -->
+            <div class="page" data-page="p04">
+                <img class="page-img" src="assets/menulibro/p04.jpg" alt="Página 4 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 05
+                 ========================================== -->
+            <div class="page" data-page="p05">
+                <img class="page-img" src="assets/menulibro/p05.jpg" alt="Página 5 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 06
+                 ========================================== -->
+            <div class="page" data-page="p06">
+                <img class="page-img" src="assets/menulibro/p06.jpg" alt="Página 6 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 07
+                 ========================================== -->
+            <div class="page" data-page="p07">
+                <img class="page-img" src="assets/menulibro/p07.jpg" alt="Página 7 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 08
+                 ========================================== -->
+            <div class="page" data-page="p08">
+                <img class="page-img" src="assets/menulibro/p08.jpg" alt="Página 8 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 09
+                 ========================================== -->
+            <div class="page" data-page="p09">
+                <img class="page-img" src="assets/menulibro/p09.jpg" alt="Página 9 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 10
+                 ========================================== -->
+            <div class="page" data-page="p10">
+                <img class="page-img" src="assets/menulibro/p10.jpg" alt="Página 10 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
+            </div>
+
+            <!-- ==========================================
+                 HOJA 11 — ÚLTIMA PÁGINA
+                 ========================================== -->
+            <div class="page" data-page="p11">
+                <img class="page-img" src="assets/menulibro/p11.jpg" alt="Página 11 del menú de Pastelería Almoría (última página)" loading="eager" decoding="async" draggable="false">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Page-flip library -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+
+    <script>
+    (function () {
+        'use strict';
+
+        // ── Estado ─────────────────────────────────────────────
+        var audioCtx = null;
+        var pageFlipInstance = null;
+        var currentPage = 0;
+        var totalPages = 0;
+        var isFlipping = false;
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Proporción real de las hojas renderizadas del PDF (1100 × 2295 px)
+        var PAGE_RATIO = 2295 / 1100;
+
+        var pageCurrentEl = document.getElementById('pageCurrent');
+        var pageTotalEl = document.getElementById('pageTotal');
+        var keyboardHint = document.getElementById('keyboardHint');
+        var loadingOverlay = document.getElementById('loadingOverlay');
+
+        // ── Audio (WebAudio sintetizado, sin archivos) ─────────
+        function getAudioContext() {
+            if (!audioCtx) {
+                try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
+            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
+        }
+
+        function createPageTurnSound(ctx) {
+            if (!ctx || prefersReducedMotion) return null;
+            try {
+                var now = ctx.currentTime;
+
+                // Layer 1: Paper swoosh (low frequency whoosh)
+                var dur = 0.35;
+                var buf = Math.floor(ctx.sampleRate * dur);
+                var data = ctx.createBuffer(1, buf, ctx.sampleRate);
+                var ch = data.getChannelData(0);
+                for (var i = 0; i < buf; i++) {
+                    var t = i / buf;
+                    var envelope = Math.sin(t * Math.PI);
+                    ch[i] = (Math.random() * 2 - 1) * envelope * 0.3;
+                }
+                var src = ctx.createBufferSource();
+                src.buffer = data;
+                var lp = ctx.createBiquadFilter();
+                lp.type = 'lowpass'; lp.frequency.value = 2000;
+                lp.frequency.setValueAtTime(2000, now);
+                lp.frequency.linearRampToValueAtTime(800, now + dur);
+                var g1 = ctx.createGain();
+                g1.gain.setValueAtTime(0, now);
+                g1.gain.linearRampToValueAtTime(0.4, now + 0.02);
+                g1.gain.setValueAtTime(0.35, now + 0.08);
+                g1.gain.exponentialRampToValueAtTime(0.001, now + dur);
+                src.connect(lp); lp.connect(g1); g1.connect(ctx.destination);
+                src.start(now); src.stop(now + dur);
+
+                // Layer 2: Paper crinkle (high frequency snaps)
+                var cDur = 0.2;
+                var cBuf = Math.floor(ctx.sampleRate * cDur);
+                var cData = ctx.createBuffer(1, cBuf, ctx.sampleRate);
+                var cCh = cData.getChannelData(0);
+                for (var j = 0; j < cBuf; j++) {
+                    var ct = j / cBuf;
+                    var cEnv = Math.sin(ct * Math.PI) * (1 - ct * 0.5);
+                    cCh[j] = Math.random() > 0.88 ? (Math.random() * 2 - 1) * 0.6 * cEnv : (Math.random() * 2 - 1) * 0.03;
+                }
+                var cSrc = ctx.createBufferSource();
+                cSrc.buffer = cData;
+                var cF = ctx.createBiquadFilter();
+                cF.type = 'bandpass'; cF.frequency.value = 4500; cF.Q.value = 0.8;
+                var cG = ctx.createGain();
+                cG.gain.setValueAtTime(0, now + 0.02);
+                cG.gain.linearRampToValueAtTime(0.25, now + 0.04);
+                cG.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                cSrc.connect(cF); cF.connect(cG); cG.connect(ctx.destination);
+                cSrc.start(now + 0.02); cSrc.stop(now + 0.22);
+
+                // Layer 3: Soft thump (page landing)
+                var tO = ctx.createOscillator();
+                tO.type = 'sine';
+                tO.frequency.setValueAtTime(120, now + 0.15);
+                tO.frequency.exponentialRampToValueAtTime(40, now + 0.3);
+                var tG = ctx.createGain();
+                tG.gain.setValueAtTime(0, now + 0.15);
+                tG.gain.linearRampToValueAtTime(0.15, now + 0.16);
+                tG.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                tO.connect(tG); tG.connect(ctx.destination);
+                tO.start(now + 0.15); tO.stop(now + 0.3);
+
+                // Layer 4: Subtle mid air movement
+                var mDur = 0.3;
+                var mBuf = Math.floor(ctx.sampleRate * mDur);
+                var mData = ctx.createBuffer(1, mBuf, ctx.sampleRate);
+                var mCh = mData.getChannelData(0);
+                for (var k = 0; k < mBuf; k++) {
+                    var mt = k / mBuf;
+                    var mEnv = Math.sin(mt * Math.PI) * 0.15;
+                    mCh[k] = (Math.random() * 2 - 1) * mEnv;
+                }
+                var mSrc = ctx.createBufferSource();
+                mSrc.buffer = mData;
+                var mF = ctx.createBiquadFilter();
+                mF.type = 'bandpass'; mF.frequency.value = 1200; mF.Q.value = 0.5;
+                var mG = ctx.createGain();
+                mG.gain.setValueAtTime(0, now);
+                mG.gain.linearRampToValueAtTime(0.12, now + 0.05);
+                mG.gain.exponentialRampToValueAtTime(0.001, now + mDur);
+                mSrc.connect(mF); mF.connect(mG); mG.connect(ctx.destination);
+                mSrc.start(now); mSrc.stop(now + mDur);
+
+                return src;
+            } catch (e) { return null; }
+        }
+
+        function playPageSound() {
+            if (prefersReducedMotion) return;
+            var ctx = getAudioContext();
+            if (ctx) createPageTurnSound(ctx);
+        }
+
+        function triggerHaptic() {
+            if ('vibrate' in navigator && !prefersReducedMotion) {
+                try { navigator.vibrate(15); } catch (e) {}
+            }
+        }
+
+        // ── Dimensiones de una hoja (manteniendo la proporción A4) ──
+        function calcPageSize(vw, vh, portrait) {
+            var pageW, pageH;
+            if (portrait) {
+                // Retrato — una sola hoja ocupa 88 % del ancho
+                pageW = Math.floor(vw * 0.88);
+                pageH = Math.floor(pageW * PAGE_RATIO);
+                if (pageH > vh * 0.90) {
+                    pageH = Math.floor(vh * 0.90);
+                    pageW = Math.floor(pageH / PAGE_RATIO);
+                }
+            } else {
+                // Paisaje — doble página ocupa 85 % del ancho
+                pageW = Math.floor((vw * 0.85) / 2);
+                pageH = Math.floor(pageW * PAGE_RATIO);
+                if (pageH > vh * 0.90) {
+                    pageH = Math.floor(vh * 0.90);
+                    pageW = Math.floor(pageH / PAGE_RATIO);
+                }
+            }
+            return { w: pageW, h: pageH };
+        }
+
+        // ── Espera a que las 11 hojas terminen de cargar ──────
+        function preloadBookImages(callback) {
+            var imgs = Array.prototype.slice.call(document.querySelectorAll('#book .page-img'));
+            if (!imgs.length) { callback(); return; }
+
+            var remaining = imgs.length;
+            var finished = false;
+
+            function finish() {
+                if (finished) return;
+                finished = true;
+                callback();
+            }
+
+            function tick() {
+                remaining--;
+                if (remaining <= 0) finish();
+            }
+
+            for (var i = 0; i < imgs.length; i++) {
+                var img = imgs[i];
+                if (img.complete) { tick(); continue; }
+                img.addEventListener('load', tick, { once: true });
+                img.addEventListener('error', tick, { once: true });
+            }
+
+            // Red de seguridad: nunca dejar el overlay colgado
+            setTimeout(finish, 4000);
+        }
+
+        // ── Init book ─────────────────────────────────────────
+        function initBook() {
+            var bookElement = document.getElementById('book');
+            var pages = bookElement.querySelectorAll('.page');
+            totalPages = pages.length;
+            pageTotalEl.textContent = totalPages;
+            bookElement.style.display = 'block';
+
+            // ── Cálculo de dimensiones ────────────────────────────
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
+            var isMobile = vw < 640;
+            var size = calcPageSize(vw, vh, isMobile);
+            var pageW = size.w;
+            var pageH = size.h;
+
+            pageFlipInstance = new St.PageFlip(bookElement, {
+                width: pageW,
+                height: pageH,
+                size: 'fixed',
+                minWidth: 150,
+                maxWidth: 2400,
+                minHeight: 200,
+                maxHeight: 2400,
+                maxShadowOpacity: 0.3,
+                showCover: false,
+                mobileScrollSupport: false,
+                clickEventForward: true,
+                useMouseEvents: true,
+                swipeDistance: 30,
+                flippingTime: 500,
+                drawShadow: true,
+                autoSize: false,
+                startPage: 0,
+                startZIndex: 0,
+                usePortrait: isMobile,
+                disableClipboardEvents: false
+            });
+
+            pageFlipInstance.loadFromHTML(pages);
+
+            // Swipe más tolerante: acepta gestos más lentos sin "pegarse"
+            var bookUI = pageFlipInstance.getUI();
+            if (bookUI && typeof bookUI.swipeTimeout === 'number') bookUI.swipeTimeout = 600;
+            window.__bookApp = pageFlipInstance;
+
+            // ── Evita que el libro quede "trabado" en user_fold ──────
+            var flipCtrl = pageFlipInstance.getFlipController();
+            function healFold() {
+                try {
+                    if (flipCtrl.getState() === 'user_fold' && !flipCtrl.getCalculation()) {
+                        flipCtrl.reset();
+                        flipCtrl.setState('read');
+                    }
+                } catch (e) { }
+            }
+            var origFold = flipCtrl.fold.bind(flipCtrl);
+            flipCtrl.fold = function (p) { origFold(p); healFold(); };
+            var origUserStop = pageFlipInstance.userStop.bind(pageFlipInstance);
+            pageFlipInstance.userStop = function (p, f) { origUserStop(p, f); healFold(); };
+
+            // ── Tocar / click en cualquier parte de la página pasa la hoja ──
+            var distEl = bookElement.querySelector('.stf__block');
+            var tapStart = { x: 0, y: 0, t: 0 };
+
+            function isInteractive(el) {
+                return !!(el && el.closest && el.closest('a, button'));
+            }
+
+            function tapFlip(clientX, clientY, target) {
+                if (!pageFlipInstance || !distEl) return;
+                if (pageFlipInstance.isUserTouch) return;
+                healFold();
+                if (pageFlipInstance.getState() !== 'read') return;
+                if (isInteractive(target)) return;
+                if (Math.abs(clientX - tapStart.x) > 12 || Math.abs(clientY - tapStart.y) > 12) return;
+                if (Date.now() - tapStart.t > 600) return;
+                var r = distEl.getBoundingClientRect();
+                if (clientX - r.left < r.width / 2) {
+                    pageFlipInstance.flipPrev();
+                } else {
+                    pageFlipInstance.flipNext();
+                }
+            }
+
+            bookElement.addEventListener('touchstart', function (e) {
+                // Los gestos táctiles los maneja nuestro código (toque +
+                // fallback): se anula touchPoint para que la librería no
+                // active su pliegue a los 600ms
+                if (bookUI) bookUI.touchPoint = null;
+                if (e.touches.length === 1) {
+                    tapStart.x = e.touches[0].clientX;
+                    tapStart.y = e.touches[0].clientY;
+                    tapStart.t = Date.now();
+                }
+            }, { passive: true });
+
+            bookElement.addEventListener('touchend', function (e) {
+                if (e.changedTouches.length !== 1) return;
+                var t = e.changedTouches[0];
+                var dx = t.clientX - tapStart.x;
+                var dy = t.clientY - tapStart.y;
+                if (isInteractive(e.target)) return;
+
+                if (Math.abs(dx) <= 12 && Math.abs(dy) <= 12) {
+                    tapFlip(t.clientX, t.clientY, e.target);
+                    return;
+                }
+
+                // Swipe diagonal/lento que la librería pudo ignorar
+                if (Math.abs(dx) > 30 && Math.abs(dy) < Math.abs(dx) * 2) {
+                    var goNext = dx < 0;
+                    var startIdx = pageFlipInstance.getCurrentPageIndex();
+                    var tries = 0;
+                    var checkSwipe = function () {
+                        if (!pageFlipInstance) return;
+                        healFold();
+                        if (pageFlipInstance.getState() !== 'read') {
+                            if (++tries < 20) setTimeout(checkSwipe, 80);
+                            return;
+                        }
+                        if (pageFlipInstance.getCurrentPageIndex() !== startIdx) return;
+                        if (goNext) pageFlipInstance.flipNext(); else pageFlipInstance.flipPrev();
+                    };
+                    setTimeout(checkSwipe, 40);
+                }
+            }, { passive: true });
+
+            bookElement.addEventListener('click', function (e) {
+                tapStart.x = e.clientX;
+                tapStart.y = e.clientY;
+                tapStart.t = Date.now();
+                tapFlip(e.clientX, e.clientY, e.target);
+            });
+
+            // ── Debounced resize handler ──────────────────────────
+            var lastW = vw;
+            var resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () {
+                    var nvw = window.innerWidth;
+                    var nvh = window.innerHeight;
+                    // No recalcular si solo cambió el alto (barra de direcciones
+                    // del celular): evita el salto del libro al desplazarse
+                    if (Math.abs(nvw - lastW) < 2 && Math.abs(nvh - vh) < 150) return;
+                    lastW = nvw;
+                    vh = nvh;
+                    // El modo (retrato/paisaje) se mantiene el de la carga
+                    var portraitMode = pageFlipInstance.getSettings().usePortrait;
+                    var nSize = calcPageSize(nvw, nvh, portraitMode);
+                    // La librería no expone resize(): se actualizan los ajustes
+                    // y el tamaño mínimo del libro, luego se redibuja
+                    var settings = pageFlipInstance.getSettings();
+                    settings.width = nSize.w;
+                    settings.height = nSize.h;
+                    var cols = settings.usePortrait ? 1 : 2;
+                    bookElement.style.minWidth = (nSize.w * cols) + 'px';
+                    bookElement.style.minHeight = nSize.h + 'px';
+                    pageFlipInstance.update();
+                }, 300);
+            });
+
+            pageFlipInstance.on('flip', function (e) {
+                currentPage = e.data;
+                pageCurrentEl.textContent = currentPage + 1;
+
+                if (isFlipping) return;
+                isFlipping = true;
+                playPageSound();
+                triggerHaptic();
+                setTimeout(function () { isFlipping = false; }, 800);
+            });
+
+            setTimeout(function () {
+                loadingOverlay.classList.add('hidden');
+                setTimeout(function () { loadingOverlay.style.display = 'none'; }, 500);
+            }, 300);
+
+            if (!('ontouchstart' in window) && !prefersReducedMotion) {
+                setTimeout(function () {
+                    keyboardHint.classList.add('show');
+                    setTimeout(function () { keyboardHint.classList.remove('show'); }, 4000);
+                }, 1200);
+            }
+        }
+
+        // ── Teclado ───────────────────────────────────────────
+        document.addEventListener('keydown', function (e) {
+            if (!pageFlipInstance) return;
+            switch (e.key) {
+                case 'ArrowRight': e.preventDefault(); pageFlipInstance.flipNext(); break;
+                case 'ArrowLeft': e.preventDefault(); pageFlipInstance.flipPrev(); break;
+                case 'Escape':
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+            }
+        });
+
+        // Touch haptic
+        var touchStartX = 0;
+        document.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+        document.addEventListener('touchend', function (e) {
+            if (Math.abs(e.changedTouches[0].clientX - touchStartX) > 50) triggerHaptic();
+        }, { passive: true });
+
+        // Performance
+        var flipBookEl = document.getElementById('book');
+        if (flipBookEl) flipBookEl.style.willChange = 'transform';
+
+        // bfcache
+        window.addEventListener('pageshow', function (e) { if (e.persisted) loadingOverlay.style.display = 'none'; });
+
+        // Init: primero las 11 hojas, luego el libro
+        function boot() {
+            preloadBookImages(function () { initBook(); });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () { setTimeout(boot, 100); });
+        } else {
+            setTimeout(boot, 100);
+        }
+
+        // Red de seguridad del overlay (si algo falla, nunca se queda bloqueado)
+        setTimeout(function () {
+            loadingOverlay.classList.add('hidden');
+            setTimeout(function () { loadingOverlay.style.display = 'none'; }, 500);
+        }, 5000);
+
+    })();
+    </script>
+</body>
+</html>
