@@ -597,7 +597,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
     <nav class="nav" id="primaryNav" aria-label="Navegación principal">
       <ul class="nav-list">
         <li><a class="nav-link" href="#inicio">Inicio</a></li>
-        <li><a class="nav-link" href="menu_libro.html" data-transition>Menú</a></li>
+        <li><a class="nav-link" href="#explora">Explorar</a></li>
         <li><a class="nav-link" href="#galeria">Galería</a></li>
         <li><a class="nav-link" href="#ubicanos">Ubícanos</a></li>
       </ul>
@@ -942,7 +942,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
      --------------------------------------------------------- */
   (function initActiveSection() {
     if (!('IntersectionObserver' in window)) return;
-    var map = { inicio: '#inicio', galeria: '#galeria', ubicanos: '#ubicanos' };
+    var map = { inicio: '#inicio', explora: '#explora', galeria: '#galeria', ubicanos: '#ubicanos' };
     var links = {};
     Object.keys(map).forEach(function (id) {
       links[id] = document.querySelector('.nav-link[href="' + map[id] + '"]');
