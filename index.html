@@ -272,13 +272,14 @@ main:focus{outline:none}
   padding:10px 18px;border-radius:var(--r-pill);box-shadow:var(--sh-2);
 }
 .mosaic-chip svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
-.mosaic-chip--centro{position:absolute;top:50%;left:calc(25% - 3px);transform:translateX(-50%);z-index:2}
+.mosaic-chip--centro{position:absolute;right:14px;bottom:-16px;z-index:2}
 
 @media (min-width:860px){
   .hero-inner{flex-direction:row;align-items:center;gap:var(--sp-8)}
   .hero-text{flex:1.05}
   .hero-mosaic{flex:1;max-width:520px}
   .hero-mosaic figure:nth-child(even){transform:translateY(18px)}
+  .mosaic-chip--centro{bottom:-34px}
 }
 
 /* ============================================================
@@ -567,6 +568,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
 }
 .pm-title{font-family:var(--font-display);font-weight:800;color:var(--vino);font-size:1.55rem;margin-bottom:var(--sp-2)}
 .pm-sub{font-size:.86rem;color:rgba(74,17,24,.74);margin-bottom:var(--sp-5)}
+#sedeSub{margin-bottom:6px}
 .pm-note{margin-top:var(--sp-4);font-size:.76rem;text-align:center;color:rgba(74,17,24,.66)}
 .sede-options{display:grid;gap:var(--sp-3);margin-bottom:var(--sp-2)}
 .sede-opt{
@@ -717,7 +719,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
         <p class="eyebrow">Todo en un solo lugar</p>
         <h2 class="section-title" id="explora-title">Explora</h2>
         <span class="ornament" aria-hidden="true"></span>
-        <p class="section-intro">Explore la propuesta culinaria exclusiva de cada uno de nuestros espacios: Elija la ubicación de su preferencia</p>
+        <p class="section-intro">Elige por dónde empezar: la carta completa, Instagram o WhatsApp — el menú se abre con la carta de tu local.</p>
       </div>
 
       <div class="plaque-grid">
@@ -915,13 +917,14 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
 </div>
 
 <!-- ============================ SELECTOR DE LOCAL (menú / WhatsApp) ============================ -->
-<div class="pm-modal" id="sedeModal" role="dialog" aria-modal="true" aria-labelledby="sedeTitle" aria-describedby="sedeSub" hidden>
+<div class="pm-modal" id="sedeModal" role="dialog" aria-modal="true" aria-labelledby="sedeTitle" aria-describedby="sedeSub sedeSub2" hidden>
   <div class="pm-card">
     <button type="button" class="pm-close" id="sedeClose" aria-label="Cerrar selector de local">
       <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <h2 class="pm-title" id="sedeTitle">Elige tu local</h2>
-    <p class="pm-sub" id="sedeSub">El menú ofrece una navegación en formato de libro</p>
+    <p class="pm-sub" id="sedeSub">Explore la propuesta culinaria exclusiva de cada uno de nuestros espacios: Elija la ubicación de su preferencia</p>
+    <p class="pm-sub" id="sedeSub2">El menú ofrece una navegación en formato de libro</p>
     <div class="sede-options" id="sedeOptions"></div>
     <p class="pm-note" id="sedeNote"></p>
   </div>
@@ -1197,6 +1200,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
     var btnX = document.getElementById('sedeClose');
     var titleEl = document.getElementById('sedeTitle');
     var subEl = document.getElementById('sedeSub');
+    var sub2El = document.getElementById('sedeSub2');
     var noteEl = document.getElementById('sedeNote');
     var optionsEl = document.getElementById('sedeOptions');
     var lastFocused = null;
@@ -1214,8 +1218,9 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
       var isMenu = mode === 'menu';
       titleEl.textContent = isMenu ? '¿Qué menú quieres ver?' : '¿De qué local escribes?';
       subEl.textContent = isMenu
-        ? 'El menú ofrece una navegación en formato de libro'
+        ? 'Explore la propuesta culinaria exclusiva de cada uno de nuestros espacios: Elija la ubicación de su preferencia'
         : 'Elige tu local y te llevamos al WhatsApp de esa casa.';
+      sub2El.hidden = !isMenu;
       noteEl.textContent = isMenu
         ? 'El menú se abre como libro con las hojas de ese local.'
         : 'Números simulados para demostración: sustitúyelos por los reales antes de publicar.';
