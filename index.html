@@ -341,8 +341,12 @@ main:focus{outline:none}
 }
 .plaque:hover .plaque-arrow{transform:translate(3px,-3px);opacity:1}
 
+@media (max-width:759px){
+  .plaque-grid>.plaque:last-child:nth-child(odd){grid-column:span 2}
+}
+
 @media (min-width:760px){
-  .plaque-grid{grid-template-columns:repeat(4,1fr);gap:var(--sp-5)}
+  .plaque-grid{grid-template-columns:repeat(3,1fr);gap:var(--sp-5)}
   .plaque{min-height:236px;padding:var(--sp-6) var(--sp-4)}
 }
 
@@ -504,7 +508,7 @@ main:focus{outline:none}
 }
 
 /* ============================================================
-   PAGO MOVIL (modal con datos simulados)
+   MODAL DE ELECCIÓN DE LOCAL (menú / WhatsApp)
    ============================================================ */
 button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
 .pm-modal{
@@ -524,15 +528,17 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
 }
 .pm-title{font-family:var(--font-display);font-weight:800;color:var(--vino);font-size:1.55rem;margin-bottom:var(--sp-2)}
 .pm-sub{font-size:.86rem;color:rgba(74,17,24,.74);margin-bottom:var(--sp-5)}
-.pm-list{list-style:none;display:grid;gap:var(--sp-3);margin:0 0 var(--sp-5)}
-.pm-list li{
-  display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-3);
-  border-bottom:1px dashed rgba(117,21,30,.3);padding-bottom:8px;
-}
-.pm-k{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--verde)}
-.pm-v{font-weight:700;color:var(--vino);text-align:right;user-select:all}
-.pm-actions{display:flex;flex-wrap:wrap;gap:var(--sp-3);justify-content:center}
 .pm-note{margin-top:var(--sp-4);font-size:.76rem;text-align:center;color:rgba(74,17,24,.66)}
+.sede-options{display:grid;gap:var(--sp-3);margin-bottom:var(--sp-2)}
+.sede-opt{
+  display:block;padding:14px 16px;border-radius:10px;text-decoration:none;
+  border:1px solid rgba(117,21,30,.25);background:#fff;color:var(--texto);
+  transition:transform var(--t),border-color var(--t),background var(--t),box-shadow var(--t);
+}
+.sede-opt:hover{transform:translateY(-3px);border-color:var(--vino);background:rgba(117,21,30,.05);box-shadow:var(--sh-2)}
+.sede-opt:focus-visible{outline:3px solid var(--dorado);outline-offset:2px}
+.sede-opt-name{display:block;font-weight:800;color:var(--vino);font-size:1.02rem;margin-bottom:2px}
+.sede-opt-desc{display:block;font-size:.82rem;color:rgba(74,17,24,.72);line-height:1.4}
 .pm-close{
   position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;
   display:grid;place-items:center;background:transparent;border:1px solid rgba(117,21,30,.3);
@@ -540,12 +546,6 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
 }
 .pm-close:hover{background:rgba(117,21,30,.08)}
 .pm-close svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round}
-.pm-toast{
-  position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:9700;
-  background:var(--vino);color:var(--blanco);font-size:.85rem;font-weight:700;
-  padding:12px 24px;border-radius:var(--r-pill);box-shadow:var(--sh-2);
-}
-.pm-toast[hidden]{display:none}
 
 /* ============================================================
    UTILIDADES / AJUSTES
@@ -617,7 +617,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
         <p class="claim reveal">“¡Mejores Postres, Mejores Celebraciones!”</p>
         <p class="hero-lead reveal">Repostería para el día a día y para tus grandes momentos. Descubre nuestra carta, mira nuestras creaciones y encuéntranos en nuestras dos sedes.</p>
         <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="menu_libro.html" data-transition>
+          <a class="btn btn-primary" href="menu_libro.html" data-sede-menu>
             Ver el menú
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           </a>
@@ -644,12 +644,12 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
         <p class="eyebrow">Todo en un solo lugar</p>
         <h2 class="section-title" id="explora-title">Explora</h2>
         <span class="ornament" aria-hidden="true"></span>
-        <p class="section-intro">Elige por dónde empezar: la carta completa, Instagram, pedidos por WhatsApp o Pago Móvil.</p>
+        <p class="section-intro">Elige por dónde empezar: la carta completa, Instagram o WhatsApp — el menú se abre con la carta de tu local.</p>
       </div>
 
       <div class="plaque-grid">
         <!-- MENÚ -->
-        <a class="plaque plaque--primary reveal" href="menu_libro.html" data-transition aria-label="Ver el menú en libro de Pastelería Almoría">
+        <a class="plaque plaque--primary reveal" href="menu_libro.html" data-sede-menu aria-label="Elegir el menú en libro: local de Tipuro o de Centro — Pastelería Almoría">
           <span class="seal" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
           </span>
@@ -668,23 +668,13 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
           <svg class="plaque-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
         </a>
 
-        <!-- WHATSAPP (número simulado de demostración) -->
-        <a class="plaque reveal" href="https://wa.me/584120000000?text=Hola%20Pasteler%C3%ADa%20Almor%C3%ADa%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp a Pastelería Almoría al 0412-000-0000, número simulado (se abre en una pestaña nueva)">
+        <!-- WHATSAPP (elige local; números simulados de demostración) -->
+        <button class="plaque reveal" type="button" id="wsOpen" aria-haspopup="dialog" aria-label="Escribir por WhatsApp: elige el local de Tipuro o de Centro (números simulados)">
           <span class="seal" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.2-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.6 9.4c.3 2.6 3.4 5.7 6 6l1.4-1.4-2-1.4-1.2.7c-.9-.5-1.7-1.3-2.2-2.2l.7-1.2-1.4-2-1.3 1.7z"/></svg>
           </span>
           <span class="plaque-label">WhatsApp</span>
-          <span class="plaque-text">0412-000-0000 · número simulado</span>
-          <svg class="plaque-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
-
-        <!-- PAGO MÓVIL (datos simulados) -->
-        <button class="plaque reveal" type="button" id="pmOpen" aria-haspopup="dialog" aria-label="Ver datos de Pago Móvil, simulados para demostración">
-          <span class="seal" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg>
-          </span>
-          <span class="plaque-label">Pago Móvil</span>
-          <span class="plaque-text">Datos para transferir · simulados</span>
+          <span class="plaque-text">Elige tu local · números demo</span>
           <svg class="plaque-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
         </button>
       </div>
@@ -789,7 +779,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
 
     <nav class="footer-nav" aria-label="Navegación del pie de página">
       <a href="#inicio">Inicio</a>
-      <a href="menu_libro.html">Menú</a>
+      <a href="menu_libro.html" data-sede-menu>Menú</a>
       <a href="#galeria">Galería</a>
       <a href="#ubicanos">Ubícanos</a>
     </nav>
@@ -818,28 +808,18 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
   </div>
 </div>
 
-<!-- ============================ PAGO MOVIL (datos simulados) ============================ -->
-<div class="pm-modal" id="pmModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle" hidden>
+<!-- ============================ SELECTOR DE LOCAL (menú / WhatsApp) ============================ -->
+<div class="pm-modal" id="sedeModal" role="dialog" aria-modal="true" aria-labelledby="sedeTitle" aria-describedby="sedeSub" hidden>
   <div class="pm-card">
-    <button type="button" class="pm-close" id="pmClose" aria-label="Cerrar datos de Pago Móvil">
+    <button type="button" class="pm-close" id="sedeClose" aria-label="Cerrar selector de local">
       <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <h2 class="pm-title" id="pmTitle">Pago Móvil</h2>
-    <p class="pm-sub">Copia estos datos para pagar tu pedido.</p>
-    <ul class="pm-list" id="pmList">
-      <li><span class="pm-k">Banco</span><span class="pm-v">0134 · Banco demo</span></li>
-      <li><span class="pm-k">Teléfono</span><span class="pm-v">0412-000-0000</span></li>
-      <li><span class="pm-k">Cédula</span><span class="pm-v">V-00.000.000</span></li>
-      <li><span class="pm-k">Titular</span><span class="pm-v">Pastelería Almoría C.A.</span></li>
-    </ul>
-    <div class="pm-actions">
-      <button type="button" class="btn btn-primary" id="pmCopy">Copiar datos</button>
-      <button type="button" class="btn btn-ghost" id="pmCloseBtn">Cerrar</button>
-    </div>
-    <p class="pm-note">Datos simulados para demostración: reemplázalos por los reales antes de publicar.</p>
+    <h2 class="pm-title" id="sedeTitle">Elige tu local</h2>
+    <p class="pm-sub" id="sedeSub">Cada local tiene su propia carta.</p>
+    <div class="sede-options" id="sedeOptions"></div>
+    <p class="pm-note" id="sedeNote"></p>
   </div>
 </div>
-<div class="pm-toast" id="pmToast" role="status" aria-live="polite" hidden>Datos copiados al portapapeles</div>
 
 <script>
 (function () {
@@ -1072,27 +1052,63 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
   })();
 
   /* ---------------------------------------------------------
-     7. Modal de Pago Movil (datos simulados)
+     7. Selector de local (menú / WhatsApp)
      --------------------------------------------------------- */
-  (function initPagoMovil() {
-    var trigger = document.getElementById('pmOpen');
-    var modal = document.getElementById('pmModal');
-    if (!trigger || !modal) return;
+  (function initSedeModal() {
+    var modal = document.getElementById('sedeModal');
+    if (!modal) return;
 
-    var btnX = document.getElementById('pmClose');
-    var btnCancel = document.getElementById('pmCloseBtn');
-    var btnCopy = document.getElementById('pmCopy');
-    var list = document.getElementById('pmList');
-    var toast = document.getElementById('pmToast');
+    var btnX = document.getElementById('sedeClose');
+    var titleEl = document.getElementById('sedeTitle');
+    var subEl = document.getElementById('sedeSub');
+    var noteEl = document.getElementById('sedeNote');
+    var optionsEl = document.getElementById('sedeOptions');
     var lastFocused = null;
-    var toastTimer = null;
 
-    function showToast(msg) {
-      if (!toast) return;
-      toast.textContent = msg;
-      toast.hidden = false;
-      window.clearTimeout(toastTimer);
-      toastTimer = window.setTimeout(function () { toast.hidden = true; }, 2400);
+    var MENU_OPTS = [
+      { name: 'Menú de Tipuro', desc: 'Local Tipuro — CC Servimas', href: 'menu_libro.html?sede=tipuro' },
+      { name: 'Menú de Centro', desc: 'Local Centro — diagonal a la Plaza Ayacucho', href: 'menu_libro.html?sede=centro' }
+    ];
+    var WS_OPTS = [
+      { name: 'WhatsApp Tipuro', desc: '0412-000-0001 · demo', href: 'https://wa.me/584120000001?text=Hola%20Pasteler%C3%ADa%20Almor%C3%ADa%20(Tipuro)%2C%20quiero%20hacer%20un%20pedido' },
+      { name: 'WhatsApp Centro', desc: '0412-000-0002 · demo', href: 'https://wa.me/584120000002?text=Hola%20Pasteler%C3%ADa%20Almor%C3%ADa%20(Centro)%2C%20quiero%20hacer%20un%20pedido' }
+    ];
+
+    function build(mode) {
+      var isMenu = mode === 'menu';
+      titleEl.textContent = isMenu ? '¿Qué menú quieres ver?' : '¿De qué local escribes?';
+      subEl.textContent = isMenu
+        ? 'Cada local tiene su propia carta: elige el menú de tu local.'
+        : 'Elige tu local y te llevamos al WhatsApp de esa casa.';
+      noteEl.textContent = isMenu
+        ? 'El menú se abre como libro con las hojas de ese local.'
+        : 'Números simulados para demostración: sustitúyelos por los reales antes de publicar.';
+      optionsEl.innerHTML = '';
+      (isMenu ? MENU_OPTS : WS_OPTS).forEach(function (opt) {
+        var a = document.createElement('a');
+        a.className = 'sede-opt';
+        a.href = opt.href;
+        if (isMenu) {
+          a.setAttribute('data-transition', '');
+        } else {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+        var name = document.createElement('span');
+        name.className = 'sede-opt-name';
+        name.textContent = opt.name;
+        var desc = document.createElement('span');
+        desc.className = 'sede-opt-desc';
+        desc.textContent = opt.desc;
+        a.appendChild(name);
+        a.appendChild(desc);
+        a.addEventListener('click', function () { close(); });
+        optionsEl.appendChild(a);
+      });
+    }
+
+    function focusables() {
+      return [btnX].concat(Array.prototype.slice.call(optionsEl.querySelectorAll('a')));
     }
 
     function open() {
@@ -1112,51 +1128,31 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
       if (lastFocused && lastFocused.focus) lastFocused.focus();
     }
 
-    function copyText(text) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        return navigator.clipboard.writeText(text);
-      }
-      return new Promise(function (resolve, reject) {
-        var ta = document.createElement('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy') ? resolve() : reject(); }
-        catch (err) { reject(err); }
-        document.body.removeChild(ta);
-      });
-    }
-
     function onKeydown(e) {
       if (e.key === 'Escape') { e.preventDefault(); close(); return; }
       if (e.key !== 'Tab') return;
-      var focusables = [btnX, btnCopy, btnCancel];
-      var first = focusables[0];
-      var last = focusables[focusables.length - 1];
+      var list = focusables();
+      var first = list[0];
+      var last = list[list.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
 
-    trigger.addEventListener('click', open);
-    btnX.addEventListener('click', close);
-    btnCancel.addEventListener('click', close);
-    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    function show(mode) { build(mode); open(); }
 
-    btnCopy.addEventListener('click', function () {
-      var rows = Array.prototype.slice.call(list.querySelectorAll('li'));
-      var text = rows.map(function (li) {
-        var k = li.querySelector('.pm-k');
-        var v = li.querySelector('.pm-v');
-        return (k ? k.textContent.trim() : '') + ': ' + (v ? v.textContent.trim() : '');
-      }).join('\n');
-      copyText(text).then(
-        function () { showToast('Datos copiados al portapapeles'); },
-        function () { showToast('No se pudo copiar: selecciona y copia a mano'); }
-      );
+    document.querySelectorAll('[data-sede-menu]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        show('menu');
+      });
     });
+
+    var wsBtn = document.getElementById('wsOpen');
+    if (wsBtn) wsBtn.addEventListener('click', function () { show('ws'); });
+
+    btnX.addEventListener('click', close);
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
   })();
 
   /* ---------------------------------------------------------

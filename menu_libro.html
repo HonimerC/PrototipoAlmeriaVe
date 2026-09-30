@@ -319,6 +319,143 @@
         }
 
         /* ============================================
+           BADGE DE LOCAL SELECCIONADO
+           ============================================ */
+        .sede-badge {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 13px;
+            background: rgba(74, 17, 24, 0.92);
+            color: var(--color-text-on-dark);
+            font-family: var(--font-category);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--color-accent-warm);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            pointer-events: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .sede-badge[hidden] { display: none; }
+
+        .sede-badge__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-accent-warm);
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           GATE: ELEGIR LOCAL (sin ?sede=)
+           ============================================ */
+        .sede-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp-3, 12px);
+            padding: 32px 20px;
+            text-align: center;
+            background: var(--escenario);
+            color: var(--color-text-on-dark);
+            overflow-y: auto;
+        }
+
+        .sede-gate[hidden] { display: none; }
+
+        .sede-gate-logo {
+            width: 92px;
+            height: 92px;
+            object-fit: contain;
+            border-radius: 50%;
+            margin-bottom: 4px;
+        }
+
+        .sede-gate-brand {
+            font-family: var(--font-category);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--dorado-claro);
+            margin: 0;
+        }
+
+        .sede-gate-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 5vw, 2.1rem);
+            font-weight: 700;
+            margin: 6px 0 0;
+            color: var(--crema);
+        }
+
+        .sede-gate-sub {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            opacity: 0.75;
+            margin: 0 0 14px;
+        }
+
+        .sede-gate-options {
+            display: grid;
+            gap: 14px;
+            width: min(420px, 92vw);
+        }
+
+        .sede-gate-opt {
+            display: block;
+            text-align: left;
+            padding: 18px 20px;
+            border-radius: 14px;
+            background: rgba(255, 253, 248, 0.06);
+            border: 1.5px solid rgba(241, 206, 150, 0.35);
+            color: var(--crema);
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .sede-gate-opt:hover {
+            transform: translateY(-3px);
+            background: rgba(241, 206, 150, 0.14);
+            border-color: var(--dorado-claro);
+        }
+
+        .sede-gate-opt:focus-visible {
+            outline: 3px solid var(--dorado-claro);
+            outline-offset: 3px;
+        }
+
+        .sede-gate-opt span {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sede-gate-opt small {
+            display: block;
+            font-family: var(--font-category);
+            font-size: 0.78rem;
+            opacity: 0.72;
+            letter-spacing: 0.04em;
+            line-height: 1.4;
+        }
+
+        /* ============================================
            SELLO DE MARCA (escritorio)
            ============================================ */
         .brand-badge {
@@ -474,12 +611,14 @@
             .volver-btn svg { width: 14px; height: 14px; }
             .page-indicator { top: 12px; right: 12px; font-size: 0.66rem; padding: 5px 10px; }
             .page-indicator__current { font-size: 0.74rem; }
+            .sede-badge { top: 12px; left: 12px; font-size: 0.66rem; padding: 5px 10px; }
         }
 
         @media (min-width: 768px) {
             .volver-btn { bottom: 32px; padding: 12px 30px; font-size: 0.88rem; }
             .brand-badge { bottom: 32px; left: 32px; }
             .page-indicator { top: 20px; right: 20px; }
+            .sede-badge { top: 20px; left: 20px; }
         }
 
         /* ============================================
@@ -487,7 +626,7 @@
            ============================================ */
         @media print {
             .mute-btn, .volver-btn, .page-indicator, .keyboard-hint,
-            .loading-overlay, .brand-badge {
+            .loading-overlay, .brand-badge, .sede-badge, .sede-gate {
                 display: none !important;
             }
             body { height: auto; overflow: visible; background: #fff; }
@@ -566,90 +705,29 @@
         <span class="brand-badge__tagline">¡Mejores Postres, Mejores Celebraciones!</span>
     </div>
 
+    <!-- Badge de local seleccionado -->
+    <div class="sede-badge" id="sedeBadge" hidden>
+        <span class="sede-badge__dot" aria-hidden="true"></span>
+        <span id="sedeBadgeText">Menú</span>
+    </div>
+
+    <!-- Gate: elegir local cuando la URL no trae ?sede= -->
+    <div class="sede-gate" id="sedeGate" role="dialog" aria-modal="true" aria-labelledby="sedeGateTitle" hidden>
+        <img class="sede-gate-logo" src="assets/logo-almoria.png" alt="">
+        <p class="sede-gate-brand">Pastelería Almoría</p>
+        <h2 class="sede-gate-title" id="sedeGateTitle">¿Qué menú quieres ver?</h2>
+        <p class="sede-gate-sub">Cada local tiene su propia carta.</p>
+        <div class="sede-gate-options">
+            <a class="sede-gate-opt" href="?sede=tipuro"><span>Menú de Tipuro</span><small>Local Tipuro — CC Servimas</small></a>
+            <a class="sede-gate-opt" href="?sede=centro"><span>Menú de Centro</span><small>Local Centro — diagonal a la Plaza Ayacucho</small></a>
+        </div>
+    </div>
+
     <!-- ==========================================
-         FLIP-BOOK — 11 hojas = 11 páginas del PDF del menú
+         FLIP-BOOK — las hojas las genera el JS según el local (?sede=)
          ========================================== -->
     <div class="book-wrapper" role="main" aria-label="Menú tipo libro de Pastelería Almoría">
-        <div class="flip-book" id="book">
-
-            <!-- ==========================================
-                 HOJA 01 — PORTADA
-                 ========================================== -->
-            <div class="page" data-page="p01">
-                <img class="page-img" src="assets/menulibro/p01.jpg" alt="Portada. Página 1 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 02
-                 ========================================== -->
-            <div class="page" data-page="p02">
-                <img class="page-img" src="assets/menulibro/p02.jpg" alt="Página 2 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 03
-                 ========================================== -->
-            <div class="page" data-page="p03">
-                <img class="page-img" src="assets/menulibro/p03.jpg" alt="Página 3 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 04
-                 ========================================== -->
-            <div class="page" data-page="p04">
-                <img class="page-img" src="assets/menulibro/p04.jpg" alt="Página 4 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 05
-                 ========================================== -->
-            <div class="page" data-page="p05">
-                <img class="page-img" src="assets/menulibro/p05.jpg" alt="Página 5 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 06
-                 ========================================== -->
-            <div class="page" data-page="p06">
-                <img class="page-img" src="assets/menulibro/p06.jpg" alt="Página 6 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 07
-                 ========================================== -->
-            <div class="page" data-page="p07">
-                <img class="page-img" src="assets/menulibro/p07.jpg" alt="Página 7 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 08
-                 ========================================== -->
-            <div class="page" data-page="p08">
-                <img class="page-img" src="assets/menulibro/p08.jpg" alt="Página 8 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 09
-                 ========================================== -->
-            <div class="page" data-page="p09">
-                <img class="page-img" src="assets/menulibro/p09.jpg" alt="Página 9 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 10
-                 ========================================== -->
-            <div class="page" data-page="p10">
-                <img class="page-img" src="assets/menulibro/p10.jpg" alt="Página 10 del menú de Pastelería Almoría" loading="eager" decoding="async" draggable="false">
-            </div>
-
-            <!-- ==========================================
-                 HOJA 11 — ÚLTIMA PÁGINA
-                 ========================================== -->
-            <div class="page" data-page="p11">
-                <img class="page-img" src="assets/menulibro/p11.jpg" alt="Página 11 del menú de Pastelería Almoría (última página)" loading="eager" decoding="async" draggable="false">
-            </div>
-
-        </div>
+        <div class="flip-book" id="book"></div>
     </div>
 
     <!-- Page-flip library -->
@@ -666,6 +744,25 @@
         var totalPages = 0;
         var isFlipping = false;
         var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // ── Sedes: menú por local (?sede=tipuro | ?sede=centro) ──
+        // TODO: cuando lleguen los 2 PDFs, apuntar cada sede a su carpeta
+        // (ej. 'assets/menulibro/tipuro' y 'assets/menulibro/centro').
+        var SEDES = {
+            tipuro: { label: 'Tipuro', folder: 'assets/menulibro', pages: 11 },
+            centro: { label: 'Centro', folder: 'assets/menulibro', pages: 11 }
+        };
+
+        function getSede() {
+            var m = /[?&]sede=(tipuro|centro)/i.exec(window.location.search);
+            var key = m ? m[1].toLowerCase() : '';
+            if (!key) {
+                try { key = sessionStorage.getItem('almoriaSede') || ''; } catch (e) { key = ''; }
+            }
+            return SEDES[key] ? key : '';
+        }
+
+        var currentSede = getSede();
 
         // Proporción real de las hojas renderizadas del PDF (1100 × 2295 px)
         var PAGE_RATIO = 2295 / 1100;
@@ -807,6 +904,53 @@
         }
 
         // ── Espera a que las 11 hojas terminen de cargar ──────
+        // ── Hojas por local + chrome (título/badge/carga) ─────
+        function buildPages(sedeKey) {
+            var conf = SEDES[sedeKey];
+            var book = document.getElementById('book');
+            if (!book || !conf) return;
+            var html = '';
+            for (var i = 1; i <= conf.pages; i++) {
+                var id = 'p' + (i < 10 ? '0' + i : i);
+                var alt = (i === 1 ? 'Portada. ' : '') +
+                    'Página ' + i + ' del menú de ' + conf.label +
+                    ' — Pastelería Almoría' + (i === conf.pages ? ' (última página)' : '');
+                html += '<div class="page" data-page="' + id + '">' +
+                    '<img class="page-img" src="' + conf.folder + '/' + id + '.jpg"' +
+                    ' alt="' + alt + '" loading="eager" decoding="async" draggable="false">' +
+                    '</div>';
+            }
+            book.innerHTML = html;
+        }
+
+        function applySedeChrome() {
+            var conf = SEDES[currentSede];
+            if (!conf) return;
+            document.title = 'Menú de ' + conf.label + ' — Pastelería Almoría';
+            var badge = document.getElementById('sedeBadge');
+            var badgeText = document.getElementById('sedeBadgeText');
+            if (badgeText) badgeText.textContent = 'Menú de ' + conf.label;
+            if (badge) badge.hidden = false;
+            var h1 = document.querySelector('header h1');
+            if (h1) h1.textContent = 'Pastelería Almoría — Menú de ' + conf.label;
+            var wrapper = document.querySelector('.book-wrapper');
+            if (wrapper) wrapper.setAttribute('aria-label', 'Menú tipo libro de Pastelería Almoría — local ' + conf.label);
+            var loadText = document.querySelector('.loading-text');
+            if (loadText) loadText.textContent = 'Abriendo menú de ' + conf.label + '…';
+        }
+
+        function showSedeGate() {
+            document.title = 'Elegir menú — Pastelería Almoría';
+            var gate = document.getElementById('sedeGate');
+            loadingOverlay.classList.add('hidden');
+            setTimeout(function () { loadingOverlay.style.display = 'none'; }, 500);
+            if (gate) {
+                gate.hidden = false;
+                var first = gate.querySelector('.sede-gate-opt');
+                if (first) first.focus();
+            }
+        }
+
         function preloadBookImages(callback) {
             var imgs = Array.prototype.slice.call(document.querySelectorAll('#book .page-img'));
             if (!imgs.length) { callback(); return; }
@@ -1025,7 +1169,14 @@
 
         // ── Teclado ───────────────────────────────────────────
         document.addEventListener('keydown', function (e) {
-            if (!pageFlipInstance) return;
+            if (!pageFlipInstance) {
+                var gateEl = document.getElementById('sedeGate');
+                if (gateEl && !gateEl.hidden && e.key === 'Escape') {
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                }
+                return;
+            }
             switch (e.key) {
                 case 'ArrowRight': e.preventDefault(); pageFlipInstance.flipNext(); break;
                 case 'ArrowLeft': e.preventDefault(); pageFlipInstance.flipPrev(); break;
@@ -1050,8 +1201,12 @@
         // bfcache
         window.addEventListener('pageshow', function (e) { if (e.persisted) loadingOverlay.style.display = 'none'; });
 
-        // Init: primero las 11 hojas, luego el libro
+        // Init: elegir sede → generar hojas → precargar → libro
         function boot() {
+            if (!currentSede) { showSedeGate(); return; }
+            try { sessionStorage.setItem('almoriaSede', currentSede); } catch (e) { /* modo privado */ }
+            buildPages(currentSede);
+            applySedeChrome();
             preloadBookImages(function () { initBook(); });
         }
 

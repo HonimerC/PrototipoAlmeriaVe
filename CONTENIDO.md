@@ -35,12 +35,12 @@ Colores medidos del PDF oficial del menú (coinciden con la paleta):
 - `assets/logo-almoria.png` — logo oficial recortado del menú (fondo granate, no recortar)
 - `assets/fotos/foto-03.jpg`, `foto-04.jpg`, `foto-08.jpg`, `foto-12.jpg`, `foto-13.jpg`, `foto-14.jpg`, `foto-16.jpg`, `foto-19.jpg` — fotos usadas en portada y galería (el resto de las 22 fotos originales se descartó por peso/redundancia)
 - `assets/menulibro/p01.jpg` … `p11.jpg` — las 11 páginas del PDF oficial del menú renderizadas a 1100 px de ancho (para `menu_libro.html`)
-- **No hay teléfono/WhatsApp ni datos de pago reales**: los que aparecen en el sitio son **SIMULADOS y marcados como demo** (WhatsApp `0412-000-0000`, Pago Móvil: banco `0134 · Banco demo`, cédula `V-00.000.000`, titular `Pastelería Almoría C.A.`). Sustituir por los reales antes de publicar.
+- **No hay teléfono/WhatsApp ni datos de pago reales**: los que aparecen en el sitio son **SIMULADOS y marcados como demo** (WhatsApp por local: Tipuro `wa.me/584120000001` → `0412-000-0001`, Centro `wa.me/584120000002` → `0412-000-0002`). Sustituir por los reales antes de publicar. **No hay datos de Pago Móvil en el sitio** (se eliminó el botón/modal de Pago Móvil).
 
 ## 3.1. Archivos del sitio
-- `index.html` — portada: hero (logo + 4 fotos), Explora (Menú, Instagram, WhatsApp, Pago Móvil), galería de 4 fotos con lightbox, Ubícanos (2 sedes), pie. **Un solo enlace a Instagram** (`@almoria_ve`, en Explora); en el pie solo queda el de la Escuela de Reposteros.
+- `index.html` — portada: hero (logo + 4 fotos), Explora (Menú, Instagram, WhatsApp — 3 placas; **sin Pago Móvil**), galería de 4 fotos con lightbox, Ubícanos (2 sedes), pie. **Un solo enlace a Instagram** (`@almoria_ve`, en Explora); en el pie solo queda el de la Escuela de Reposteros. **Selector de local** (modal `#sedeModal`): al pulsar "Menú" (hero, placa EXPLORA o pie) pregunta "¿Qué menú quieres ver?" → `menu_libro.html?sede=tipuro` / `?sede=centro`; al pulsar la placa "WhatsApp" pregunta "¿De qué local escribes?" → `wa.me/584120000001` / `wa.me/584120000002` (demo, pestaña nueva).
 - `menu.html` — menú interactivo: 19 categorías / 103 productos, buscador, scroll-spy.
-- `menu_libro.html` — propuesta de **menú tipo libro** (11 hojas = páginas del PDF), con page-flip, indicador de página, sonido y modal de Pago Móvil simulado.
+- `menu_libro.html` — propuesta de **menú tipo libro**, con page-flip, indicador de página y sonido. **Menú por local**: lee `?sede=tipuro|centro` (recuerda la última en `sessionStorage`), muestra badge "Menú de Tipuro/Centro" (arriba a la izquierda), actualiza título y genera las hojas con JS desde la config `SEDES` (hoy ambas sedes apuntan a `assets/menulibro/p01–p11.jpg` compartido; cambiar `folder` a `assets/menulibro/tipuro` y `.../centro` cuando lleguen los 2 PDFs). Sin `?sede=` y sin sesión previa muestra el **gate** de elección local.
 
 ## 4. Estructura mínima del prototipo (2 páginas)
 
