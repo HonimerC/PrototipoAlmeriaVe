@@ -262,8 +262,11 @@ main:focus{outline:none}
   filter:saturate(.96);
 }
 .hero-mosaic figure:hover img{transform:scale(1.05);filter:saturate(1.06)}
-.mosaic-chip{
+.mosaic-chips{
   position:absolute;left:14px;bottom:-16px;z-index:2;
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.mosaic-chip{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--dorado);color:var(--texto);
   font-size:.76rem;font-weight:800;letter-spacing:.08em;
@@ -653,9 +656,8 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
       </span>
     </a>
 
-    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Abrir menú de navegación">
       <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
-      <span class="nav-toggle-label" id="navToggleLabel">Menú</span>
     </button>
 
     <nav class="nav" id="primaryNav" aria-label="Navegación principal">
@@ -694,10 +696,16 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
         <figure><img src="assets/fotos/foto-19.jpg" alt="Pastel de boda temática Nueva York con la Estatua de la Libertad de Pastelería Almoría" loading="lazy" decoding="async"></figure>
         <figure><img src="assets/fotos/foto-04.jpg" alt="Pastel de caramelo con donas de chocolate en caja de Pastelería Almoría" loading="lazy" decoding="async"></figure>
         <figure><img src="assets/fotos/foto-13.jpg" alt="Mesa con mini postres, cupcakes y bocadillos de Pastelería Almoría" loading="lazy" decoding="async"></figure>
-        <span class="mosaic-chip">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Tipuro · Centro
-        </span>
+        <div class="mosaic-chips">
+          <span class="mosaic-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Tipuro
+          </span>
+          <span class="mosaic-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Centro
+          </span>
+        </div>
       </div>
     </div>
   </section>
@@ -709,7 +717,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
         <p class="eyebrow">Todo en un solo lugar</p>
         <h2 class="section-title" id="explora-title">Explora</h2>
         <span class="ornament" aria-hidden="true"></span>
-        <p class="section-intro">Elige por dónde empezar: la carta completa, Instagram o WhatsApp — el menú se abre con la carta de tu local.</p>
+        <p class="section-intro">Explore la propuesta culinaria exclusiva de cada uno de nuestros espacios: Elija la ubicación de su preferencia</p>
       </div>
 
       <div class="plaque-grid">
@@ -846,12 +854,11 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
   <section id="trabaja" class="section trabaja" aria-labelledby="trabaja-title">
     <div class="wrap trabaja-inner reveal">
       <p class="eyebrow">Únete al equipo</p>
-      <h2 class="section-title" id="trabaja-title">¿Quieres trabajar con nosotros?</h2>
+      <h2 class="section-title" id="trabaja-title">¿Quieres trabajar en Almoría?</h2>
       <span class="ornament" aria-hidden="true"></span>
-      <p class="section-intro">Si estás interesado en trabajar con nosotros y sientes que tu perfil encaja con nosotros, manda tu correo aquí o contáctanos aquí.</p>
+      <p class="section-intro">Si te apasiona la repostería y deseas formar parte del equipo, déjanos tu correo o ponte en contacto.</p>
       <div class="trabaja-actions">
-        <button type="button" class="btn btn-primary js-trabaja" aria-haspopup="dialog">Manda tu correo</button>
-        <button type="button" class="btn btn-ghost js-trabaja" aria-haspopup="dialog">Contáctanos aquí</button>
+        <button type="button" class="btn btn-primary js-trabaja" aria-haspopup="dialog">Postúlate</button>
       </div>
     </div>
   </section>
@@ -914,7 +921,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
       <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <h2 class="pm-title" id="sedeTitle">Elige tu local</h2>
-    <p class="pm-sub" id="sedeSub">Cada local tiene su propia carta.</p>
+    <p class="pm-sub" id="sedeSub">El menú ofrece una navegación en formato de libro</p>
     <div class="sede-options" id="sedeOptions"></div>
     <p class="pm-note" id="sedeNote"></p>
   </div>
@@ -926,7 +933,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
     <button type="button" class="pm-close" id="trabajaClose" aria-label="Cerrar mensaje de contacto">
       <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <h2 class="pm-title" id="trabajaTitle">Trabaja con nosotros</h2>
+    <h2 class="pm-title" id="trabajaTitle">Postúlate en Almoría</h2>
     <p class="pm-sub" id="trabajaSub">Queremos a una persona que tenga estas habilidades:</p>
     <ul class="skill-list">
       <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Experiencia en repostería</li>
@@ -939,7 +946,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
     </ul>
     <div class="contact-block">
       <p class="contact-label">Envía tus datos por</p>
-      <a class="contact-row" href="mailto:talento@almoria.demo?subject=Postulaci%C3%B3n%20%E2%80%94%20Trabaja%20con%20nosotros&amp;body=Nombre%3A%0AEdad%3A%0ATel%C3%A9fono%3A%0AExperiencia%3A%0AHabilidades%20que%20cumplo%3A%0A">
+      <a class="contact-row" href="mailto:talento@almoria.demo?subject=Postulaci%C3%B3n%20%E2%80%94%20Pasteler%C3%ADa%20Almor%C3%ADa&amp;body=Nombre%3A%0AEdad%3A%0ATel%C3%A9fono%3A%0AExperiencia%3A%0AHabilidades%20que%20cumplo%3A%0A">
         <span class="contact-k">Correo</span>
         <span class="contact-v">talento@almoria.demo</span>
       </a>
@@ -1209,7 +1216,7 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
       var isMenu = mode === 'menu';
       titleEl.textContent = isMenu ? '¿Qué menú quieres ver?' : '¿De qué local escribes?';
       subEl.textContent = isMenu
-        ? 'Cada local tiene su propia carta: elige el menú de tu local.'
+        ? 'El menú ofrece una navegación en formato de libro'
         : 'Elige tu local y te llevamos al WhatsApp de esa casa.';
       noteEl.textContent = isMenu
         ? 'El menú se abre como libro con las hojas de ese local.'
