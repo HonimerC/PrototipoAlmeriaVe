@@ -148,7 +148,6 @@ main:focus{outline:none}
   color:var(--blanco);transition:background var(--t-fast);
 }
 .nav-toggle:hover{background:rgba(255,253,248,.12)}
-.nav-toggle-label{font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .bars{display:flex;flex-direction:column;gap:5px;width:22px}
 .bars span{display:block;height:2px;background:currentColor;border-radius:2px;transition:transform var(--t),opacity var(--t-fast)}
 .nav-toggle[aria-expanded="true"] .bars span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -1020,13 +1019,11 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
   (function initNav() {
     var toggle = document.getElementById('navToggle');
     var nav = document.getElementById('primaryNav');
-    var label = document.getElementById('navToggleLabel');
     if (!toggle || !nav) return;
 
     function setOpen(open) {
       nav.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (label) label.textContent = open ? 'Cerrar' : 'Menú';
       toggle.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
     }
 
