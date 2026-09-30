@@ -456,6 +456,14 @@ main:focus{outline:none}
 @media (min-width:760px){.loc-grid{grid-template-columns:1fr 1fr;gap:var(--sp-7)}}
 
 /* ============================================================
+   TRABAJA CON NOSOTROS (CTA final → modal)
+   ============================================================ */
+.trabaja{background:rgba(233,160,168,.16);border-top:1px solid rgba(117,21,30,.14)}
+.trabaja-inner{max-width:760px;margin-inline:auto;text-align:center}
+.trabaja .section-intro{max-width:58ch;margin-inline:auto}
+.trabaja-actions{display:flex;flex-wrap:wrap;gap:var(--sp-3);justify-content:center;margin-top:var(--sp-5)}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .site-footer{
@@ -567,6 +575,34 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
 .sede-opt:focus-visible{outline:3px solid var(--dorado);outline-offset:2px}
 .sede-opt-name{display:block;font-weight:800;color:var(--vino);font-size:1.02rem;margin-bottom:2px}
 .sede-opt-desc{display:block;font-size:.82rem;color:rgba(74,17,24,.72);line-height:1.4}
+.skill-list{list-style:none;display:grid;gap:9px;margin:0 0 var(--sp-4);text-align:left}
+.skill-list li{
+  display:flex;gap:10px;align-items:flex-start;
+  font-size:.92rem;line-height:1.45;color:rgba(74,17,24,.88);
+}
+.skill-list svg{
+  flex:0 0 auto;width:17px;height:17px;margin-top:3px;
+  stroke:var(--verde);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;
+}
+.contact-block{
+  background:rgba(233,160,168,.28);border:1px dashed rgba(117,21,30,.4);
+  border-radius:10px;padding:14px 16px;margin-bottom:var(--sp-3);text-align:left;
+}
+.contact-label{
+  font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--vino);margin:0 0 8px;
+}
+.contact-row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:8px 0;text-decoration:none;
+  border-bottom:1px dashed rgba(117,21,30,.28);
+}
+.contact-row:last-child{border-bottom:0}
+.contact-k{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(74,17,24,.66)}
+.contact-v{font-weight:700;color:var(--vino);user-select:all;-webkit-user-select:all;text-align:right}
+.contact-row:hover .contact-v{text-decoration:underline}
+#trabajaModal .pm-card{max-height:calc(100vh - 48px);overflow-y:auto}
+#trabajaModal .pm-sub{margin-bottom:var(--sp-4);font-weight:600;color:var(--vino)}
 .pm-close{
   position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;
   display:grid;place-items:center;background:transparent;border:1px solid rgba(117,21,30,.3);
@@ -805,6 +841,20 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
       </div>
     </div>
   </section>
+
+  <!-- ============================ TRABAJA CON NOSOTROS ============================ -->
+  <section id="trabaja" class="section trabaja" aria-labelledby="trabaja-title">
+    <div class="wrap trabaja-inner reveal">
+      <p class="eyebrow">Únete al equipo</p>
+      <h2 class="section-title" id="trabaja-title">¿Quieres trabajar con nosotros?</h2>
+      <span class="ornament" aria-hidden="true"></span>
+      <p class="section-intro">Si estás interesado en trabajar con nosotros y sientes que tu perfil encaja con nosotros, manda tu correo aquí o contáctanos aquí.</p>
+      <div class="trabaja-actions">
+        <button type="button" class="btn btn-primary js-trabaja" aria-haspopup="dialog">Manda tu correo</button>
+        <button type="button" class="btn btn-ghost js-trabaja" aria-haspopup="dialog">Contáctanos aquí</button>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- ============================ FOOTER ============================ -->
@@ -867,6 +917,38 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
     <p class="pm-sub" id="sedeSub">Cada local tiene su propia carta.</p>
     <div class="sede-options" id="sedeOptions"></div>
     <p class="pm-note" id="sedeNote"></p>
+  </div>
+</div>
+
+<!-- ============================ TRABAJA CON NOSOTROS (habilidades + contacto) ============================ -->
+<div class="pm-modal" id="trabajaModal" role="dialog" aria-modal="true" aria-labelledby="trabajaTitle" hidden>
+  <div class="pm-card">
+    <button type="button" class="pm-close" id="trabajaClose" aria-label="Cerrar mensaje de contacto">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h2 class="pm-title" id="trabajaTitle">Trabaja con nosotros</h2>
+    <p class="pm-sub" id="trabajaSub">Queremos a una persona que tenga estas habilidades:</p>
+    <ul class="skill-list">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Experiencia en repostería</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Decoración de tortas</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Manejo de hornos y masas</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Trabajo en equipo</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Puntualidad</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Atención al cliente</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12.5 9.5 18 20 6.5"/></svg>Manejo de caja</li>
+    </ul>
+    <div class="contact-block">
+      <p class="contact-label">Envía tus datos por</p>
+      <a class="contact-row" href="mailto:talento@almoria.demo?subject=Postulaci%C3%B3n%20%E2%80%94%20Trabaja%20con%20nosotros&amp;body=Nombre%3A%0AEdad%3A%0ATel%C3%A9fono%3A%0AExperiencia%3A%0AHabilidades%20que%20cumplo%3A%0A">
+        <span class="contact-k">Correo</span>
+        <span class="contact-v">talento@almoria.demo</span>
+      </a>
+      <a class="contact-row" href="tel:+584120000000">
+        <span class="contact-k">Teléfono</span>
+        <span class="contact-v">0412-000-0000</span>
+      </a>
+    </div>
+    <p class="pm-note">Datos simulados para demostración: sustitúyelos por los reales antes de publicar.</p>
   </div>
 </div>
 
@@ -1205,7 +1287,60 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
   })();
 
   /* ---------------------------------------------------------
-     8. Observador de prefers-reduced-motion
+     8. Modal "Trabaja con nosotros" (habilidades + contacto)
+     --------------------------------------------------------- */
+  (function initTrabajaModal() {
+    var modal = document.getElementById('trabajaModal');
+    if (!modal) return;
+
+    var btnX = document.getElementById('trabajaClose');
+    var lastFocused = null;
+
+    function focusables() {
+      return [btnX].concat(Array.prototype.slice.call(modal.querySelectorAll('a')));
+    }
+
+    function open() {
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      window.requestAnimationFrame(function () { modal.classList.add('is-open'); });
+      btnX.focus();
+      document.addEventListener('keydown', onKeydown, true);
+    }
+
+    function close() {
+      modal.classList.remove('is-open');
+      document.removeEventListener('keydown', onKeydown, true);
+      document.body.style.overflow = '';
+      window.setTimeout(function () { modal.hidden = true; }, reduced() ? 0 : 220);
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    function onKeydown(e) {
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab') return;
+      var list = focusables();
+      var first = list[0];
+      var last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    document.querySelectorAll('.js-trabaja').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        lastFocused = el;
+        open();
+      });
+    });
+
+    btnX.addEventListener('click', close);
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+  })();
+
+  /* ---------------------------------------------------------
+     9. Observador de prefers-reduced-motion
      --------------------------------------------------------- */
   (function initMotionWatcher() {
     function apply(e) {
