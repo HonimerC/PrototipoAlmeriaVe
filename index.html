@@ -272,7 +272,7 @@ main:focus{outline:none}
   padding:10px 18px;border-radius:var(--r-pill);box-shadow:var(--sh-2);
 }
 .mosaic-chip svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
-.mosaic-chip:nth-child(2){transform:translateY(-30px)}
+.mosaic-chip--centro{position:absolute;top:50%;left:calc(25% - 3px);transform:translateX(-50%);z-index:2}
 
 @media (min-width:860px){
   .hero-inner{flex-direction:row;align-items:center;gap:var(--sp-8)}
@@ -701,11 +701,11 @@ button.plaque{width:100%;font-family:inherit;cursor:pointer;text-align:center}
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Tipuro
           </span>
-          <span class="mosaic-chip">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Centro
-          </span>
         </div>
+        <span class="mosaic-chip mosaic-chip--centro">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Centro
+        </span>
       </div>
     </div>
   </section>
